@@ -9,8 +9,8 @@ A standalone ecommerce storefront built with React and Vite.
 3. Run `npm run server`
 4. Open a second terminal and run `npm run dev`
 
-Frontend: http://127.0.0.1:5173
-Backend API: http://127.0.0.1:4000/api
+Frontend: http://127.0.0.1:5174
+Backend API: http://127.0.0.1:5174/api
 Database: `database/db.json`
 
 ## Features

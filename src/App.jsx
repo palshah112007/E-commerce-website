@@ -3,7 +3,7 @@ import { BrowserRouter, Link, Route, Routes, useLocation, useNavigate, useParams
 
 const CartContext = createContext(null);
 const BRAND_NAME = 'Novamart';
-const API_BASE = 'http://127.0.0.1:4000/api';
+const API_BASE = '/api';
 
 async function api(path, options = {}) {
   const response = await fetch(`${API_BASE}${path}`, {
