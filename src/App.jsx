@@ -1,61 +1,64 @@
 import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 import { BrowserRouter, Link, Route, Routes, useLocation, useNavigate, useParams } from 'react-router-dom';
-import productsData from './data/products.js';
 
 const CartContext = createContext(null);
 const BRAND_NAME = 'Novamart';
-const categories = ['All departments', ...new Set(productsData.map((product) => product.category))];
+const API_BASE = 'http://127.0.0.1:4000/api';
+
+async function api(path, options = {}) {
+  const response = await fetch(`${API_BASE}${path}`, {
+    headers: { 'Content-Type': 'application/json' },
+    ...options,
+  });
+  if (!response.ok) throw new Error(`API failed: ${response.status}`);
+  return response.json();
+}
 
 function useCart() {
   return useContext(CartContext);
 }
 
 function CartProvider({ children }) {
-  const [cartItems, setCartItems] = useState(() => {
-    const saved = localStorage.getItem('market-cart');
-    return saved ? JSON.parse(saved) : [];
-  });
+  const [cartItems, setCartItems] = useState([]);
 
   useEffect(() => {
-    localStorage.setItem('market-cart', JSON.stringify(cartItems));
-  }, [cartItems]);
+    api('/cart').then(setCartItems).catch(() => setCartItems([]));
+  }, []);
 
-  const addToCart = (product, quantity = 1) => {
-    setCartItems((current) => {
-      const existing = current.find((item) => item.id === product.id);
-      if (existing) {
-        return current.map((item) =>
-          item.id === product.id ? { ...item, quantity: Math.min(item.quantity + quantity, product.stock) } : item
-        );
-      }
-      return [...current, { ...product, quantity }];
+  const addToCart = async (product, quantity = 1) => {
+    const next = await api('/cart/items', {
+      method: 'POST',
+      body: JSON.stringify({ productId: product.id, quantity }),
     });
+    setCartItems(next);
   };
 
-  const updateQuantity = (productId, quantity) => {
-    setCartItems((current) =>
-      current
-        .map((item) =>
-          item.id === productId
-            ? { ...item, quantity: Math.min(Math.max(Number(quantity) || 0, 0), item.stock) }
-            : item
-        )
-        .filter((item) => item.quantity > 0)
-    );
+  const updateQuantity = async (productId, quantity) => {
+    const next = await api(`/cart/items/${productId}`, {
+      method: 'PATCH',
+      body: JSON.stringify({ quantity }),
+    });
+    setCartItems(next);
   };
 
-  const removeFromCart = (productId) => {
-    setCartItems((current) => current.filter((item) => item.id !== productId));
+  const removeFromCart = async (productId) => {
+    const next = await api(`/cart/items/${productId}`, { method: 'DELETE' });
+    setCartItems(next);
   };
 
-  const clearCart = () => setCartItems([]);
+  const clearCart = async () => setCartItems(await api('/cart', { method: 'DELETE' }));
+  const placeOrder = async () => {
+    const order = await api('/orders', { method: 'POST' });
+    setCartItems([]);
+    return order;
+  };
   const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
   const subtotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
   const savings = cartItems.reduce((sum, item) => sum + Math.max(item.listPrice - item.price, 0) * item.quantity, 0);
 
   return (
     <CartContext.Provider
-      value={{ cartItems, addToCart, updateQuantity, removeFromCart, clearCart, totalItems, subtotal, savings }}
+      value={{ cartItems, addToCart, updateQuantity, removeFromCart, clearCart, placeOrder, totalItems, subtotal, savings }}
     >
       {children}
     </CartContext.Provider>
@@ -84,7 +87,7 @@ function Stars({ rating, reviews }) {
   );
 }
 
-function Header() {
+function Header({ categories }) {
   const { totalItems } = useCart();
 
   return (
@@ -97,7 +100,7 @@ function Header() {
           <small>Deliver to</small>
           <strong>Mumbai 400001</strong>
         </div>
-        <SearchBox />
+        <SearchBox categories={categories} />
         <nav className="account-nav" aria-label="Account navigation">
           <Link to="/" className="nav-cell">
             <small>Hello, sign in</small>
@@ -127,7 +130,7 @@ function Header() {
   );
 }
 
-function SearchBox() {
+function SearchBox({ categories }) {
   const [query, setQuery] = useState('');
   const [category, setCategory] = useState('All departments');
   const navigate = useNavigate();
@@ -159,7 +162,7 @@ function SearchBox() {
   );
 }
 
-function Home() {
+function Home({ productsData, categories }) {
   const [category, setCategory] = useState('All departments');
   const [sort, setSort] = useState('featured');
   const [expressOnly, setExpressOnly] = useState(false);
@@ -367,7 +370,7 @@ function ProductCard({ product }) {
   );
 }
 
-function ProductDetails() {
+function ProductDetails({ productsData }) {
   const { id } = useParams();
   const product = productsData.find((item) => item.id === id);
   const [quantity, setQuantity] = useState(1);
@@ -462,7 +465,8 @@ function ProductDetails() {
 }
 
 function CartPage() {
-  const { cartItems, updateQuantity, removeFromCart, subtotal, savings, clearCart } = useCart();
+  const { cartItems, updateQuantity, removeFromCart, subtotal, savings, clearCart, placeOrder } = useCart();
+  const [orderMessage, setOrderMessage] = useState('');
   const tax = subtotal * 0.0825;
   const shipping = subtotal > 0 && subtotal < 35 ? 5.99 : 0;
   const orderTotal = subtotal + tax + shipping;
@@ -514,8 +518,16 @@ function CartPage() {
             <div className="summary-row"><span>Estimated tax</span><strong>{formatPrice(tax)}</strong></div>
             <div className="summary-row savings"><span>Savings</span><strong>-{formatPrice(savings)}</strong></div>
             <div className="summary-total"><span>Order total</span><strong>{formatPrice(orderTotal)}</strong></div>
-            <button>Proceed to checkout</button>
+            <button
+              onClick={async () => {
+                const order = await placeOrder();
+                setOrderMessage(`Order placed: ${order.id}`);
+              }}
+            >
+              Proceed to checkout
+            </button>
             <button className="secondary-button" onClick={clearCart}>Clear cart</button>
+            {orderMessage && <p className="success-line">{orderMessage}</p>}
           </aside>
         </div>
       )}
@@ -533,13 +545,29 @@ function NotFound() {
 }
 
 export default function App() {
+  const [productsData, setProductsData] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    api('/products')
+      .then(setProductsData)
+      .finally(() => setLoading(false));
+  }, []);
+
+  const categories = useMemo(
+    () => ['All departments', ...new Set(productsData.map((product) => product.category))],
+    [productsData]
+  );
+
+  if (loading) return <main className="empty-state page-shell">Loading Novamart...</main>;
+
   return (
     <BrowserRouter>
       <CartProvider>
-        <Header />
+        <Header categories={categories} />
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/product/:id" element={<ProductDetails />} />
+          <Route path="/" element={<Home productsData={productsData} categories={categories} />} />
+          <Route path="/product/:id" element={<ProductDetails productsData={productsData} />} />
           <Route path="/cart" element={<CartPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

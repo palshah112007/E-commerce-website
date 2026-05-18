@@ -1,0 +1,342 @@
+{
+  "products": [
+    {
+      "id": "p1",
+      "title": "Sony WH-1000XM5 Wireless Noise Canceling Headphones",
+      "brand": "Sony",
+      "price": 328,
+      "listPrice": 399.99,
+      "rating": 4.7,
+      "reviews": 42186,
+      "category": "Electronics",
+      "image": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=1000&q=85",
+      "gallery": [
+        "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=1000&q=85",
+        "https://images.unsplash.com/photo-1546435770-a3e426bf472b?auto=format&fit=crop&w=1000&q=85",
+        "https://images.unsplash.com/photo-1487215078519-e21cc028cb29?auto=format&fit=crop&w=1000&q=85",
+        "https://images.unsplash.com/photo-1577174881658-0f30ed549adc?auto=format&fit=crop&w=1000&q=85"
+      ],
+      "description": "Premium over-ear headphones with industry-leading noise cancellation, 30-hour battery life, quick charging, and multipoint Bluetooth.",
+      "express": true,
+      "stock": 18,
+      "seller": "TechSource Direct",
+      "delivery": "Tuesday, May 19",
+      "badge": "Limited time deal",
+      "tags": [
+        "headphones",
+        "audio",
+        "work"
+      ]
+    },
+    {
+      "id": "p2",
+      "title": "Apple iPad Air 11-inch with M2 chip, 128GB, Wi-Fi",
+      "brand": "Apple",
+      "price": 569,
+      "listPrice": 599,
+      "rating": 4.8,
+      "reviews": 17844,
+      "category": "Electronics",
+      "image": "https://images.unsplash.com/photo-1561154464-82e9adf32764?auto=format&fit=crop&w=1000&q=85",
+      "gallery": [
+        "https://images.unsplash.com/photo-1561154464-82e9adf32764?auto=format&fit=crop&w=1000&q=85",
+        "https://images.unsplash.com/photo-1589739900266-43b2843f4c12?auto=format&fit=crop&w=1000&q=85",
+        "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?auto=format&fit=crop&w=1000&q=85",
+        "https://images.unsplash.com/photo-1557825835-a526494be845?auto=format&fit=crop&w=1000&q=85"
+      ],
+      "description": "Lightweight tablet with a Liquid Retina display, fast M2 performance, all-day battery life, and support for Apple Pencil Pro.",
+      "express": true,
+      "stock": 9,
+      "seller": "Slate Supply Co.",
+      "delivery": "Wednesday, May 20",
+      "badge": "Choice",
+      "tags": [
+        "tablet",
+        "apple",
+        "school"
+      ]
+    },
+    {
+      "id": "p3",
+      "title": "Nespresso Vertuo Next Coffee and Espresso Machine",
+      "brand": "Nespresso",
+      "price": 129.95,
+      "listPrice": 179.95,
+      "rating": 4.5,
+      "reviews": 24671,
+      "category": "Kitchen",
+      "image": "https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=1000&q=85",
+      "gallery": [
+        "https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=1000&q=85",
+        "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1000&q=85",
+        "https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&w=1000&q=85",
+        "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=1000&q=85"
+      ],
+      "description": "Compact coffee and espresso maker with one-touch brewing, barcode capsule recognition, and a removable water tank.",
+      "express": true,
+      "stock": 31,
+      "seller": "Nespresso Store",
+      "delivery": "Tuesday, May 19",
+      "badge": "Deal",
+      "tags": [
+        "coffee",
+        "home",
+        "kitchen"
+      ]
+    },
+    {
+      "id": "p4",
+      "title": "Kobo Libra Colour E-Reader with 32GB Storage",
+      "brand": "Kobo",
+      "price": 169.99,
+      "listPrice": 189.99,
+      "rating": 4.6,
+      "reviews": 58921,
+      "category": "Books",
+      "image": "https://images.unsplash.com/photo-1519682337058-a94d519337bc?auto=format&fit=crop&w=1000&q=85",
+      "gallery": [
+        "https://images.unsplash.com/photo-1519682337058-a94d519337bc?auto=format&fit=crop&w=1000&q=85",
+        "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?auto=format&fit=crop&w=1000&q=85",
+        "https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=1000&q=85",
+        "https://images.unsplash.com/photo-1516979187457-637abb4f9353?auto=format&fit=crop&w=1000&q=85"
+      ],
+      "description": "Waterproof color e-reader with warm light, note-taking support, weeks of battery life, and a glare-free display.",
+      "express": true,
+      "stock": 24,
+      "seller": "Readerly Goods",
+      "delivery": "Tuesday, May 19",
+      "badge": "Best seller",
+      "tags": [
+        "reading",
+        "travel",
+        "books"
+      ]
+    },
+    {
+      "id": "p5",
+      "title": "Dyson V12 Detect Slim Cordless Vacuum Cleaner",
+      "brand": "Dyson",
+      "price": 499.99,
+      "listPrice": 649.99,
+      "rating": 4.4,
+      "reviews": 13980,
+      "category": "Home",
+      "image": "https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?auto=format&fit=crop&w=1000&q=85",
+      "gallery": [
+        "https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?auto=format&fit=crop&w=1000&q=85",
+        "https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=1000&q=85",
+        "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=1000&q=85",
+        "https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=1000&q=85"
+      ],
+      "description": "Lightweight cordless vacuum with laser dust detection, whole-machine filtration, and an LCD screen for run-time tracking.",
+      "express": true,
+      "stock": 7,
+      "seller": "Dyson Official",
+      "delivery": "Tuesday, May 19",
+      "badge": "Save 23%",
+      "tags": [
+        "cleaning",
+        "home",
+        "appliance"
+      ]
+    },
+    {
+      "id": "p6",
+      "title": "Nike Pegasus 41 Road Running Shoes",
+      "brand": "Nike",
+      "price": 119.99,
+      "listPrice": 140,
+      "rating": 4.5,
+      "reviews": 8392,
+      "category": "Fashion",
+      "image": "https://images.unsplash.com/photo-1460353581641-37baddab0fa2?auto=format&fit=crop&w=1000&q=85",
+      "gallery": [
+        "https://images.unsplash.com/photo-1460353581641-37baddab0fa2?auto=format&fit=crop&w=1000&q=85",
+        "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=1000&q=85",
+        "https://images.unsplash.com/photo-1491553895911-0055eca6402d?auto=format&fit=crop&w=1000&q=85",
+        "https://images.unsplash.com/photo-1552346154-21d32810aba3?auto=format&fit=crop&w=1000&q=85"
+      ],
+      "description": "Everyday running shoes with responsive cushioning, breathable mesh, and durable waffle-inspired traction.",
+      "express": true,
+      "stock": 42,
+      "seller": "RunStyle",
+      "delivery": "Wednesday, May 20",
+      "badge": "Popular",
+      "tags": [
+        "shoes",
+        "running",
+        "sports"
+      ]
+    },
+    {
+      "id": "p7",
+      "title": "Levi's 511 Slim Fit Jeans",
+      "brand": "Levi's",
+      "price": 48.65,
+      "listPrice": 69.5,
+      "rating": 4.3,
+      "reviews": 31204,
+      "category": "Fashion",
+      "image": "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1000&q=85",
+      "gallery": [
+        "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1000&q=85",
+        "https://images.unsplash.com/photo-1542272604-787c3835535d?auto=format&fit=crop&w=1000&q=85",
+        "https://images.unsplash.com/photo-1506629905607-d9c297d46178?auto=format&fit=crop&w=1000&q=85",
+        "https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=1000&q=85"
+      ],
+      "description": "Slim-fit denim with a modern cut, stretch comfort, and classic five-pocket styling for daily wear.",
+      "express": true,
+      "stock": 66,
+      "seller": "Levi's Store",
+      "delivery": "Tuesday, May 19",
+      "badge": "30% off",
+      "tags": [
+        "jeans",
+        "clothing",
+        "men"
+      ]
+    },
+    {
+      "id": "p8",
+      "title": "Anker 737 Power Bank 24,000mAh with 140W Output",
+      "brand": "Anker",
+      "price": 109.99,
+      "listPrice": 159.99,
+      "rating": 4.7,
+      "reviews": 11318,
+      "category": "Accessories",
+      "image": "https://images.unsplash.com/photo-1615526675159-e248c3021d3f?auto=format&fit=crop&w=1000&q=85",
+      "gallery": [
+        "https://images.unsplash.com/photo-1615526675159-e248c3021d3f?auto=format&fit=crop&w=1000&q=85",
+        "https://images.unsplash.com/photo-1609091839311-d5365f9ff1c5?auto=format&fit=crop&w=1000&q=85",
+        "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?auto=format&fit=crop&w=1000&q=85",
+        "https://images.unsplash.com/photo-1516321497487-e288fb19713f?auto=format&fit=crop&w=1000&q=85"
+      ],
+      "description": "High-capacity portable charger with smart display, fast USB-C output, and enough power for phones, tablets, and laptops.",
+      "express": true,
+      "stock": 53,
+      "seller": "AnkerDirect",
+      "delivery": "Tuesday, May 19",
+      "badge": "Coupon",
+      "tags": [
+        "charger",
+        "travel",
+        "battery"
+      ]
+    },
+    {
+      "id": "p9",
+      "title": "Samsung 32-inch Smart Monitor M8 UHD Display",
+      "brand": "Samsung",
+      "price": 399.99,
+      "listPrice": 699.99,
+      "rating": 4.2,
+      "reviews": 6247,
+      "category": "Electronics",
+      "image": "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1000&q=85",
+      "gallery": [
+        "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1000&q=85",
+        "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?auto=format&fit=crop&w=1000&q=85",
+        "https://images.unsplash.com/photo-1547082299-de196ea013d6?auto=format&fit=crop&w=1000&q=85",
+        "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1000&q=85"
+      ],
+      "description": "4K smart monitor with streaming apps, detachable camera, USB-C connectivity, and a slim workspace-friendly design.",
+      "express": false,
+      "stock": 12,
+      "seller": "Display Hub",
+      "delivery": "Wednesday, May 20",
+      "badge": "43% off",
+      "tags": [
+        "monitor",
+        "desk",
+        "office"
+      ]
+    },
+    {
+      "id": "p10",
+      "title": "Lodge 12 Inch Pre-Seasoned Cast Iron Skillet",
+      "brand": "Lodge",
+      "price": 29.9,
+      "listPrice": 44.9,
+      "rating": 4.8,
+      "reviews": 91145,
+      "category": "Kitchen",
+      "image": "https://images.unsplash.com/photo-1556911220-bff31c812dba?auto=format&fit=crop&w=1000&q=85",
+      "gallery": [
+        "https://images.unsplash.com/photo-1556911220-bff31c812dba?auto=format&fit=crop&w=1000&q=85",
+        "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=1000&q=85",
+        "https://images.unsplash.com/photo-1484980972926-edee96e0960d?auto=format&fit=crop&w=1000&q=85",
+        "https://images.unsplash.com/photo-1495521821757-a1efb6729352?auto=format&fit=crop&w=1000&q=85"
+      ],
+      "description": "Durable cast iron skillet for stovetop, oven, grill, and campfire cooking with excellent heat retention.",
+      "express": true,
+      "stock": 104,
+      "seller": "Lodge Store",
+      "delivery": "Tuesday, May 19",
+      "badge": "Best seller",
+      "tags": [
+        "cookware",
+        "kitchen",
+        "home"
+      ]
+    },
+    {
+      "id": "p11",
+      "title": "Garmin Forerunner 265 GPS Running Smartwatch",
+      "brand": "Garmin",
+      "price": 349.99,
+      "listPrice": 449.99,
+      "rating": 4.6,
+      "reviews": 7450,
+      "category": "Sports",
+      "image": "https://images.unsplash.com/photo-1575311373937-040b8e1fd5b6?auto=format&fit=crop&w=1000&q=85",
+      "gallery": [
+        "https://images.unsplash.com/photo-1575311373937-040b8e1fd5b6?auto=format&fit=crop&w=1000&q=85",
+        "https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?auto=format&fit=crop&w=1000&q=85",
+        "https://images.unsplash.com/photo-1510017803434-a899398421b3?auto=format&fit=crop&w=1000&q=85",
+        "https://images.unsplash.com/photo-1518459031867-a89b944bffe4?auto=format&fit=crop&w=1000&q=85"
+      ],
+      "description": "AMOLED GPS running watch with training readiness, heart-rate tracking, race widgets, and multi-day battery life.",
+      "express": true,
+      "stock": 16,
+      "seller": "Garmin Authorized",
+      "delivery": "Wednesday, May 20",
+      "badge": "Top rated",
+      "tags": [
+        "watch",
+        "fitness",
+        "running"
+      ]
+    },
+    {
+      "id": "p12",
+      "title": "CeraVe Hydrating Facial Cleanser, 16 Fl Oz",
+      "brand": "CeraVe",
+      "price": 14.78,
+      "listPrice": 18.99,
+      "rating": 4.7,
+      "reviews": 102884,
+      "category": "Beauty",
+      "image": "https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=1000&q=85",
+      "gallery": [
+        "https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=1000&q=85",
+        "https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=1000&q=85",
+        "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&w=1000&q=85",
+        "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=1000&q=85"
+      ],
+      "description": "Gentle non-foaming cleanser with ceramides and hyaluronic acid for normal to dry skin.",
+      "express": true,
+      "stock": 200,
+      "seller": "CeraVe Store",
+      "delivery": "Tuesday, May 19",
+      "badge": "Subscribe & Save",
+      "tags": [
+        "skincare",
+        "beauty",
+        "daily"
+      ]
+    }
+  ],
+  "cart": [],
+  "orders": []
+}
