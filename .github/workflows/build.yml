@@ -1,0 +1,53 @@
+name: Build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    name: Install, build & smoke test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build production bundle
+        run: npm run build
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/
+          retention-days: 7
+
+      - name: Smoke test API server
+        run: |
+          npm run server &
+          SERVER_PID=$!
+          for i in $(seq 1 30); do
+            if curl -sf http://127.0.0.1:4000/api/products > /dev/null; then
+              echo "API is up"
+              break
+            fi
+            sleep 1
+          done
+          curl -sf http://127.0.0.1:4000/api/products | grep -q '"id"' || {
+            echo "::error::API did not return products"
+            exit 1
+          }
+          echo "Smoke test passed"
+          kill $SERVER_PID
