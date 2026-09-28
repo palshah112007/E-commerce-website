@@ -32,6 +32,19 @@ a {
   text-decoration: none;
 }
 
+.demo-banner {
+  background: #f0c14b;
+  color: #0f1111;
+  text-align: center;
+  font-size: 0.85rem;
+  padding: 6px 14px;
+}
+
+.demo-banner a {
+  text-decoration: underline;
+  font-weight: 700;
+}
+
 .site-header {
   position: sticky;
   top: 0;

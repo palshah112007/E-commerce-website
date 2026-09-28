@@ -1,9 +1,15 @@
 import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 import { BrowserRouter, Link, Route, Routes, useLocation, useNavigate, useParams } from 'react-router-dom';
+import demoProducts from './data/products.js';
 
 const CartContext = createContext(null);
 const BRAND_NAME = 'Novamart';
 const API_BASE = '/api';
+const GITHUB_URL = 'https://github.com/palshah112007/E-commerce-website';
+const DEMO_CART_KEY = 'novamart-demo-cart';
+// Static hosts (GitHub Pages) cannot run the Node API — fall back to bundled
+// sample data and a localStorage-backed cart so the deployed demo stays usable.
+const DEMO_MODE = import.meta.env.MODE === 'production' && window.location.hostname.endsWith('github.io');
 
 async function api(path, options = {}) {
   const response = await fetch(`${API_BASE}${path}`, {
@@ -14,6 +20,61 @@ async function api(path, options = {}) {
   return response.json();
 }
 
+function loadDemoCart() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(DEMO_CART_KEY) || '[]');
+    return saved
+      .map((item) => {
+        const product = demoProducts.find((entry) => entry.id === item.productId);
+        return product ? { ...product, quantity: item.quantity } : null;
+      })
+      .filter(Boolean);
+  } catch {
+    return [];
+  }
+}
+
+function saveDemoCart(items) {
+  localStorage.setItem(
+    DEMO_CART_KEY,
+    JSON.stringify(items.map((item) => ({ productId: item.id, quantity: item.quantity })))
+  );
+}
+
+function addDemoItem(product, quantity) {
+  const items = loadDemoCart();
+  const existing = items.find((item) => item.id === product.id);
+  if (existing) existing.quantity = Math.min(existing.quantity + quantity, product.stock);
+  else items.push({ ...product, quantity: Math.min(quantity, product.stock) });
+  saveDemoCart(items);
+  return items;
+}
+
+function updateDemoItem(productId, quantity) {
+  const items = loadDemoCart()
+    .map((item) => (item.id === productId ? { ...item, quantity: Number(quantity) || 0 } : item))
+    .filter((item) => item.quantity > 0);
+  saveDemoCart(items);
+  return items;
+}
+
+function removeDemoItem(productId) {
+  const items = loadDemoCart().filter((item) => item.id !== productId);
+  saveDemoCart(items);
+  return items;
+}
+
+function DemoBanner() {
+  if (!DEMO_MODE) return null;
+  return (
+    <div className="demo-banner">
+      Demo mode — browsing with sample data; cart is stored in your browser.
+      {' '}
+      <a href={GITHUB_URL} target="_blank" rel="noreferrer">View on GitHub</a>
+    </div>
+  );
+}
+
 function useCart() {
   return useContext(CartContext);
 }
@@ -22,10 +83,15 @@ function CartProvider({ children }) {
   const [cartItems, setCartItems] = useState([]);
 
   useEffect(() => {
+    if (DEMO_MODE) {
+      setCartItems(loadDemoCart());
+      return;
+    }
     api('/cart').then(setCartItems).catch(() => setCartItems([]));
   }, []);
 
   const addToCart = async (product, quantity = 1) => {
+    if (DEMO_MODE) return setCartItems(addDemoItem(product, quantity));
     const next = await api('/cart/items', {
       method: 'POST',
       body: JSON.stringify({ productId: product.id, quantity }),
@@ -34,6 +100,7 @@ function CartProvider({ children }) {
   };
 
   const updateQuantity = async (productId, quantity) => {
+    if (DEMO_MODE) return setCartItems(updateDemoItem(productId, quantity));
     const next = await api(`/cart/items/${productId}`, {
       method: 'PATCH',
       body: JSON.stringify({ quantity }),
@@ -42,12 +109,28 @@ function CartProvider({ children }) {
   };
 
   const removeFromCart = async (productId) => {
+    if (DEMO_MODE) return setCartItems(removeDemoItem(productId));
     const next = await api(`/cart/items/${productId}`, { method: 'DELETE' });
     setCartItems(next);
   };
 
-  const clearCart = async () => setCartItems(await api('/cart', { method: 'DELETE' }));
+  const clearCart = async () => {
+    if (DEMO_MODE) {
+      localStorage.removeItem(DEMO_CART_KEY);
+      setCartItems([]);
+      return;
+    }
+    setCartItems(await api('/cart', { method: 'DELETE' }));
+  };
   const placeOrder = async () => {
+    if (DEMO_MODE) {
+      const items = loadDemoCart();
+      const total = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
+      const order = { id: `ord_${Date.now()}`, createdAt: new Date().toISOString(), items, total };
+      localStorage.removeItem(DEMO_CART_KEY);
+      setCartItems([]);
+      return order;
+    }
     const order = await api('/orders', { method: 'POST' });
     setCartItems([]);
     return order;
@@ -549,8 +632,14 @@ export default function App() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    if (DEMO_MODE) {
+      setProductsData(demoProducts);
+      setLoading(false);
+      return;
+    }
     api('/products')
       .then(setProductsData)
+      .catch(() => setProductsData(demoProducts))
       .finally(() => setLoading(false));
   }, []);
 
@@ -562,8 +651,9 @@ export default function App() {
   if (loading) return <main className="empty-state page-shell">Loading Novamart...</main>;
 
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={import.meta.env.BASE_URL}>
       <CartProvider>
+        <DemoBanner />
         <Header categories={categories} />
         <Routes>
           <Route path="/" element={<Home productsData={productsData} categories={categories} />} />

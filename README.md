@@ -1,5 +1,9 @@
 # Novamart — E-commerce Storefront
 
+> ### 🛍️ [▶ Live Demo — Click to Run](https://palshah112007.github.io/E-commerce-website/)
+>
+> **Demo mode:** On GitHub Pages the app runs with bundled sample data and a browser-local cart (static hosting cannot run the Node API). For the full stack with a real backend, run locally with the steps below.
+
 Novamart is a full-stack, Amazon-style e-commerce storefront built with **React** and **Vite**, backed by a lightweight **Node.js API** with a file-based JSON database. It lets users browse a product catalog, search and filter by category, view product details, manage a shopping cart, and place checkout orders.
 
 ## Features
@@ -54,6 +58,12 @@ Novamart is a full-stack, Amazon-style e-commerce storefront built with **React*
    **http://127.0.0.1:5174**
 
 That's it — the REST API is served by the same dev server at `/api` (via a Vite middleware plugin), so no second terminal is required. The database file is created and seeded automatically on first request.
+
+### Live Demo on GitHub Pages
+
+Every push to `main` automatically builds and deploys the app to GitHub Pages (see `.github/workflows/build.yml`). The deployed demo runs in demo mode: bundled sample data and a cart saved in your browser's localStorage.
+
+To host the frontend elsewhere, build with `npm run build` and deploy the `dist/` folder to any static host. Note the `base` path in `vite.config.js` assumes `/E-commerce-website/` — adjust it for a different subpath, or set it to `/` for a root/domain deployment.
 
 ### Optional: standalone API server
 

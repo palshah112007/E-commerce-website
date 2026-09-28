@@ -103,9 +103,26 @@ function apiPlugin() {
         }
       });
     },
+    configurePreviewServer(server) {
+      // SPA fallback for `vite preview`: serve index.html for client-side
+      // routes like /cart or /product/:id.
+      server.middlewares.use((req, res, next) => {
+        const url = new URL(req.url, 'http://localhost');
+        if (
+          url.pathname.startsWith('/api') ||
+          url.pathname.includes('.') ||
+          url.pathname.startsWith('/@') ||
+          url.pathname.startsWith('/node_modules')
+        ) return next();
+        req.url = '/index.html';
+        next();
+      });
+    },
   };
 }
 
 export default defineConfig({
   plugins: [apiPlugin(), react()],
+  // Deployed under a subpath on GitHub Pages (/<repo-name>/) in production builds.
+  base: process.env.NODE_ENV === 'production' ? '/E-commerce-website/' : '/',
 });
