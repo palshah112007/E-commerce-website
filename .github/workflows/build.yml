@@ -10,6 +10,7 @@ permissions:
   contents: read
   pages: write
   id-token: write
+  administration: write # required to auto-enable Pages on first deploy
 
 # Allow only one concurrent deployment, skipping runs queued between the
 # in-progress and latest queued run. Do not cancel in-progress runs.
