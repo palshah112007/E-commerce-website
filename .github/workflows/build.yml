@@ -5,12 +5,12 @@ on:
     branches: [main]
   pull_request:
     branches: [main]
+  workflow_dispatch:
 
 permissions:
   contents: read
   pages: write
   id-token: write
-  administration: write # required to auto-enable Pages on first deploy
 
 # Allow only one concurrent deployment, skipping runs queued between the
 # in-progress and latest queued run. Do not cancel in-progress runs.
@@ -89,10 +89,10 @@ jobs:
       - name: Build production bundle
         run: npm run build
 
-      - name: Setup Pages (enables Pages on first deploy)
+      # Requires Pages to be enabled once in repo Settings -> Pages with
+      # Source = "GitHub Actions" (GITHUB_TOKEN cannot self-enable Pages).
+      - name: Setup Pages
         uses: actions/configure-pages@v5
-        with:
-          enablement: true
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
